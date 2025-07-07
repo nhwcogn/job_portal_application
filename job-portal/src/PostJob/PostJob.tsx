@@ -1,6 +1,7 @@
-import { TagsInput } from "@mantine/core";
+import { Button, TagsInput } from "@mantine/core";
 import { fields } from "../Data/PostJob";
 import SelectInput from "./SelectInput";
+import TextEditor from "./TextEditor";
 
 const PostJob = () => {
     const select = fields;
@@ -19,7 +20,15 @@ const PostJob = () => {
                 <SelectInput {...select[4]}/>
                 <SelectInput {...select[5]}/>
             </div> 
-            <TagsInput label="Skills" placeholder="Add skills" splitChars={[',', ' ', '|']} clearable acceptValueOnBlur/>
+            <TagsInput withAsterisk label="Skills" placeholder="Add skills" splitChars={[',', ' ', '|']} clearable acceptValueOnBlur/>
+            <div className="[&_button[data-active='true']]:!text-bright-sun-400 [&_button[data-active='true']]:!bg-bright-sun-400/20">
+                <div className="text-sm font-medium">Job Description</div>
+                <TextEditor />
+            </div>
+            <div className="flex gap-4">
+                <Button color="brightSun.4" variant="light">Public Job</Button>
+                <Button color="brightSun.4" variant="outline">Save as Draft</Button>
+            </div>
         </div>
     </div>
 }

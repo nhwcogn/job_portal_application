@@ -12,7 +12,7 @@ const Header = () => {
         <div className=" flex gap-3 items-center">
             <div className="flex items-center gap-3">
                 <div>Nhu Ngoc</div>
-                <Avatar src="avatar.jpg" alt="it's me" />
+                <Avatar src="avatar.png" alt="it's me" />
             </div>
             <div className="bg-mine-shaft-900 rounded-full p-1.5">
             <IconSettings stroke={1.5} />

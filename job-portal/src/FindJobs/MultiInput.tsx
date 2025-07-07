@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Checkbox, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@mantine/core';
-import { IconSearch, IconSelector } from '@tabler/icons-react';
-
-const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
+import { IconSelector } from '@tabler/icons-react';
 
 const MultiInput=(props:any) => {
     useEffect(() => {
         setData(props.options);
-    }, []);
+    }, [props.options]);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Combobox, InputBase, useCombobox } from '@mantine/core';
+import { Combobox, InputBase, ScrollArea, useCombobox } from '@mantine/core';
 
 const SelectInput=(props:any) => {
     useEffect(() => {
@@ -63,10 +63,12 @@ const SelectInput=(props:any) => {
 
       <Combobox.Dropdown>
         <Combobox.Options>
+        <ScrollArea.Autosize mah={200} type="scroll">
           {options}
           {!exactOptionMatch && search.trim().length > 0 && (
             <Combobox.Option value="$create">+ Create {search}</Combobox.Option>
           )}
+        </ScrollArea.Autosize>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
