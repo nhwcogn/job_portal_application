@@ -3,6 +3,7 @@ import { createTheme, Divider, MantineProvider} from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/tiptap/styles.css';
+import '@mantine/dates/styles.css';
 import HomePage from './Pages/HomePage';
 import { BrowserRouter, Route,  Routes } from 'react-router-dom';
 import FindJobs from './Pages/FindJobs';
@@ -14,6 +15,7 @@ import PostJobPage from './Pages/PostJobPage';
 import JobDescPage from './Pages/JobDescPage';
 import ApplyJobPage from './Pages/ApplyJobPage';
 import CompanyPage from './Pages/CompanyPage';
+import PostedJobPage from './Pages/PostedJobPage';
 
 function App() {
   const theme = createTheme({
@@ -62,6 +64,7 @@ function App() {
         <Route path='/jobs' element={<JobDescPage/>} />
         <Route path='/apply-job' element={<ApplyJobPage/>} />
         <Route path='/upload-job' element={<PostJobPage/>} />
+        <Route path='/posted-job' element={<PostedJobPage/>} />
         <Route path='/talent-profile' element={<TalentProfilePage/>} />
         <Route path='/company' element={<CompanyPage/>} />
         <Route path='*' element={<HomePage/>} />

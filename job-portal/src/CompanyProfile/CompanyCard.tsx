@@ -1,5 +1,5 @@
 import { ActionIcon } from "@mantine/core";
-import { IconAdjustments, IconExternalLink } from "@tabler/icons-react";
+import { IconExternalLink } from "@tabler/icons-react";
 
 const CompanyCard = (props:any) => {
     return <div>
