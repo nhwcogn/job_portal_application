@@ -1,17 +1,21 @@
 import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
-import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil } from "@tabler/icons-react";
+import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
 import SelectInput from "./SelectInput";
 import fields from "../Data/Profile";
 import { profile } from "../Data/TalentData";
 import ExpCard from "./ExpCard";
 import CertiCard from "./CertiCard";
+import ExpInput from "./ExpInput";
+import CertiInput from "./CertiInput";
 
 const ProfileUser = (props:any) => {
     const [about, setAbout] = useState('As a web developer, I specialize in building responsive and user-friendly websites using modern technologies like HTML, CSS, JavaScript, and frameworks such as React or Angular. I enjoy turning ideas into interactive, accessible, and efficient web applications.');
     const [skills, setSkills] = useState(["React", "Angular","Java", "SpringBoot", "MongoDB", "HTML", "CSS", "MySQL", "Python"]);
     const select=fields
     const [edit,setEdit]=useState([false, false, false, false, false])
+    const [addExp, setAddExp]=useState(false)
+    const [addCerti, setAddCerti]=useState(false)
     const handleEdit=(index:any)=>{
         const newEdit=[...edit];
         newEdit[index]=!newEdit[index];
@@ -67,23 +71,31 @@ const ProfileUser = (props:any) => {
             </div>
             <Divider mx="xs" my="xl"/>
             <div className="px-3">
-                <div className="text-2xl font-semibold mb-4 flex justify-between">Experience <ActionIcon onClick={()=>handleEdit(3)} variant="subtle" color="brightSun.4" size="lg">
+                <div className="text-2xl font-semibold mb-4 flex justify-between">Experience <div className="flex gap-2"><ActionIcon onClick={()=>setAddExp(true)} variant="subtle" color="brightSun.4" size="lg">
+                        <IconPlus className="h-4/5 w-4/5"/></ActionIcon>
+                    <ActionIcon onClick={()=>handleEdit(3)} variant="subtle" color="brightSun.4" size="lg">
                         {edit[3]?<IconDeviceFloppy className="h-4/5 w-4/5" />:<IconPencil className="h-4/5 w-4/5"/>}
-                    </ActionIcon></div>
+                    </ActionIcon></div></div>
                 <div className="flex flex-col gap-8">
                     {
                         profile.experience.map((exp, index) => <ExpCard key={index} {...exp} edit={edit[3]} />)
                     }
+                    {addExp && <ExpInput add setEdit={setAddExp}/>}
                 </div>
             </div>
             <Divider mx="xs" my="xl"/>
             <div className="px-3">
-                <div className="text-2xl font-semibold mb-4 flex justify-between">Certifications <ActionIcon onClick={()=>handleEdit(4)} variant="subtle" color="brightSun.4" size="lg">
+                <div className="text-2xl font-semibold mb-4 flex justify-between">Certifications <div className="flex gap-2"><ActionIcon onClick={()=>setAddCerti(true)} variant="subtle" color="brightSun.4" size="lg">
+                        <IconPlus className="h-4/5 w-4/5"/></ActionIcon>
+                    <ActionIcon onClick={()=>handleEdit(4)} variant="subtle" color="brightSun.4" size="lg">
                         {edit[4]?<IconDeviceFloppy className="h-4/5 w-4/5" />:<IconPencil className="h-4/5 w-4/5"/>}
-                    </ActionIcon></div>
+                    </ActionIcon></div></div>
                 <div className="flex flex-col gap-8">
                     {
-                        profile.certifications.map((cert:any, index:any) => <CertiCard key={index} {...cert}/>)
+                        profile.certifications.map((cert:any, index:any) => <CertiCard key={index} edit={edit[4]} {...cert}/>)
+                    }
+                    {
+                        addCerti && <CertiInput setEdit={setAddCerti}/>
                     }
                 </div>
             </div>

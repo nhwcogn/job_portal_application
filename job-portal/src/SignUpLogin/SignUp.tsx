@@ -9,7 +9,7 @@ const SignUp = () => {
             <TextInput withAsterisk leftSection={<IconAt size={16} />} label="Your email" placeholder="Your email"/>
             <PasswordInput withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Password" placeholder="Password" />
             <PasswordInput withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Confirm Password" placeholder="Confirm Password" />
-            <Checkbox label={<>I accept{' '}<Anchor>terms & conditions</Anchor></>}/>
+            <Checkbox autoContrast label={<>I accept{' '}<Anchor>terms & conditions</Anchor></>}/>
             <Button autoContrast variant="filled">Sign up</Button>
             <div className="mx-auto">Have an account?<Link to="/login" className="text-bright-sun-400 hover:underline">Login</Link></div>
         </div>
