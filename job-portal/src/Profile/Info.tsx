@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ActionIcon } from "@mantine/core";
 import SelectInput from "./SelectInput";
-import { IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil } from "@tabler/icons-react";
+import { IconBriefcase, IconCheck, IconDeviceFloppy, IconMapPin, IconPencil, IconX } from "@tabler/icons-react";
 import { hasLength, isEmail, useForm } from "@mantine/form";
 import fields from "../Data/Profile";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,23 +18,27 @@ const Info = () => {
         if (!edit) {
             setEdit(true);
             form.setValues({jobTitle: profile.jobTitle, company: profile.company, location: profile.location});
-        }else {
-            setEdit(false);
-            let updatedProfile = {...profile, ...form.getValues()};
-            dispatch(changeProfile(updatedProfile));
-            successNotification("Success","Profile Updated Successfully!");
-        }
+        }else setEdit(false);
     }
     const form = useForm({
         mode: 'controlled',
         initialValues: { jobTitle: '', company: '', location: '' }
     });
+    const handleSave=()=>{
+        setEdit(false);
+            let updatedProfile = {...profile, ...form.getValues()};
+            dispatch(changeProfile(updatedProfile));
+            successNotification("Success","Profile Updated Successfully!");
+    }
     return <>
-    <div className="text-3xl font-semibold flex justify-between"> {user.name}
-        <ActionIcon onClick={handleClick} variant="subtle" color="brightSun.4" size="lg">
-        {edit?<IconDeviceFloppy className="h-4/5 w-4/5" />:<IconPencil className="h-4/5 w-4/5"/>}
+    <div className="text-3xl font-semibold flex justify-between"> {user?.name} <div>
+        {edit &&<ActionIcon onClick={handleSave} variant="subtle" color="green.8" size="lg">
+        <IconCheck className="h-4/5 w-4/5" stroke={1.5}/>
+        </ActionIcon>}
+        <ActionIcon onClick={handleClick} variant="subtle" color={edit?"red.8":"brightSun.4"} size="lg">
+        {edit?<IconX className="h-4/5 w-4/5" stroke={1.5}/>:<IconPencil className="h-4/5 w-4/5"/>}
         </ActionIcon>
-        </div>
+        </div></div>
         {
             edit?<><div className="flex gap-10 [&>*]:w-1/2">
             <SelectInput form={form} name="jobTitle" {...select[0]}/>
