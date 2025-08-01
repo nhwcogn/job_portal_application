@@ -1,37 +1,44 @@
-import { Divider } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Avatar, Divider, FileInput, Overlay } from "@mantine/core";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../Services/ProfileService";
 import Info from "./Info";
-import { setProfile } from "../Slices/ProfileSlice";
+import { changeProfile, setProfile } from "../Slices/ProfileSlice";
 import About from "./About";
 import Skills from "./Skills";
 import Experience from "./Experience";
 import Certificate from "./Certificate";
+import { useHover } from "@mantine/hooks";
+import { IconEdit } from "@tabler/icons-react";
+import { successNotification } from "../Services/NotificationService";
 
 const ProfileUser = (props:any) => {
     const dispatch = useDispatch();
-    const user = useSelector((state:any) => state.user);
     const profile = useSelector((state:any) => state.profile);
-    const [edit,setEdit]=useState([false, false, false, false, false])
-    const [addExp, setAddExp]=useState(false)
-    const [addCerti, setAddCerti]=useState(false)
-    const handleEdit=(index:any)=>{
-        const newEdit=[...edit];
-        newEdit[index]=!newEdit[index];
-        setEdit(newEdit);
+    const { hovered, ref } = useHover();
+    const handleFileChange = async (image:any)=>{
+        let picture:any = await getbase64(image);
+        let updatedProfile = {...profile, picture: picture.split(',')[1]};
+        dispatch(changeProfile(updatedProfile));
+        successNotification("Success","Profile Picture Updated Successfully!");
     }
-    useEffect(()=>{
-        getProfile(user.id).then((data:any)=>{
-            dispatch(setProfile(data));
-        }).catch((error:any)=>{
-            console.error(error);
+    const getbase64 = (file:any) => {
+        return new Promise((resolve, reject)=>{
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
         })
-    }, [])
+    }
     return <div className="w-2/3 mx-auto">
         <div className="relative">
             <img className="rounded-t-2xl" src="/Profile/banner.jpg" alt="" />
-            <img className="w-48 h-48 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8" src="/avatar.png" alt="" />
+            <div ref={ref} className="absolute flex items-center justify-center -bottom-1/3 left-3">
+                <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" src={profile.picture?`data:image/jpeg;base64,${profile.picture}`:"Avatar.png"} alt=""/>
+                {hovered && <Overlay className="!rounded-full" color="#000" backgroundOpacity={0.75} />}
+                {hovered && <IconEdit className="absolute z-[300] !w-16 !h-16" />}
+                {hovered && <FileInput onChange={handleFileChange} className="absolute [&_*]!rounded-full z-[301] [&_*]:!h-full !h-full w-full" variant="transparent" accept="image/png,image/jpeg"/>}
+            </div>
         </div>
         <div className="px-3 mt-16">
             <Info />    

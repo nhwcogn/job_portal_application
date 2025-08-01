@@ -3,10 +3,22 @@ import { IconBell, IconBinoculars, IconSettings } from "@tabler/icons-react";
 import NavLinks from "./NavLinks";
 import { Link, useLocation } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setProfile } from "../Slices/ProfileSlice";
+import { getProfile } from "../Services/ProfileService";
 
 const Header = () => {
-    const user = useSelector((state:any)=>state.user);
+    const dispatch = useDispatch();
+    const user = useSelector((state:any) => state.user);
+    const profile = useSelector((state:any) => state.profile);
+    useEffect(()=>{
+        getProfile(user.id).then((data:any)=>{
+            dispatch(setProfile(data));
+        }).catch((error:any)=>{
+            console.error(error);
+        })
+    }, [])
     const location= useLocation();
     return location.pathname != "/sign-up" && location.pathname != "/login" ? <div className="w-full bg-mine-shaft-950 px-6 text-white h-20 flex justify-between items-center bg-mine-shaft-950">
         <div className="flex gap-3 items-center text-bright-sun-400">
