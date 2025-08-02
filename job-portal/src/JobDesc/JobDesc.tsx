@@ -1,25 +1,26 @@
 import { ActionIcon, Button, Divider } from "@mantine/core";
 import { IconBookmark} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
-import { card, desc, skills } from "../Data/JobDescData";
+import { card } from "../Data/JobDescData";
 //@ts-ignore
 import DOMPurify from "dompurify";
+import { timeAgo } from "../Services/Utilities";
 
 const JobDesc = (props:any) => {
-    const data = DOMPurify.sanitize(desc);
+    const data = DOMPurify.sanitize(props.description);
      return <div className="w-2/3">
         <div className="flex justify-between ">
             <div className="flex gap-2 items-center">
                 <div className="p-3 bg-mine-shaft-800 rounded-xl">
-                    <img className="h-14" src={`/Icons/Google.png`} alt="" />
+                    <img className="h-14" src={`/Icons/${props.company}.png`} alt="" />
                 </div> 
                 <div>
-                    <div className="font-semibold text-2xl">Software Engineer</div>
-                    <div className="text-lg text-mine-shaft-300">Google &#x2022; 3 days &#x2022; 14 applicants</div>
+                    <div className="font-semibold text-2xl">{props.jobTitle}</div>
+                    <div className="text-lg text-mine-shaft-300">{props.company} &#x2022; {timeAgo(props.postedTime)} &#x2022; {props.applicants?props.applicants.length:0} applicants</div>
                 </div>
             </div>
             <div className="flex flex-col gap-2 items-center">
-                <Link to="/apply-job" className="w-full"> 
+                <Link to={`/apply-job/${props.id}`} className="w-full"> 
                     <Button color="brightSun.4" size="sm" variant="light">{props.edit?"Edit":"Apply"}</Button>
                 </Link>
                 {props.edit?<Button color="red.5" size="sm" variant="outline">Delete</Button>:<IconBookmark className="text-bright-sun-400 cursor-pointer"/>}
@@ -33,7 +34,7 @@ const JobDesc = (props:any) => {
                     <item.icon className="h-4/5 ư-4/5" stroke={1.5} />
                 </ActionIcon>
                 <div className="text-sm text-mine-shaft-300">{item.name}</div>
-                <div className="font-semibold">{item.value}</div>
+                <div className="font-semibold">{props?props[item.id]:"NA"}{item.id=="packageOffered" && <>$</>}</div>
             </div>)
             } 
         </div>
@@ -42,7 +43,7 @@ const JobDesc = (props:any) => {
             <div className="text-xl font-semibold mb-5">Required Skills</div>
             <div className="flex flex-wrap gap-2">
                 {
-                    skills.map((item:any,index:any)=><ActionIcon key={index} color="brightSun.4" className="!h-fit font-medium text-sm !w-fit" variant="light" p="xs" radius="xl" aria-label="Settings">
+                    props?.skillsRequired?.map((item:any,index:number)=><ActionIcon key={index} color="brightSun.4" className="!h-fit font-medium text-sm !w-fit" variant="light" p="xs" radius="xl" aria-label="Settings">
                     {item}
                 </ActionIcon>)
                 }
@@ -57,14 +58,14 @@ const JobDesc = (props:any) => {
             <div className="flex justify-between mb-3">
             <div className="flex gap-2 items-center">
                 <div className="p-3 bg-mine-shaft-800 rounded-xl">
-                    <img className="h-8" src={"/Icons/Google.png"} alt="" />
+                    <img className="h-8" src={`/Icons/${props.company}.png`} alt="" />
                 </div> 
                 <div className="flex flex-col">
-                    <div className="font-medium text-lg">Software Engineer</div>
+                    <div className="font-medium text-lg">{props.company}</div>
                     <div className="text-mine-shaft-300">10K+ employees</div>
                 </div>
             </div>
-                <Link to="/company"> 
+                <Link to={`/company/${props.company}`}> 
                     <Button color="brightSun.4" variant="light">Company Page</Button>
                 </Link>
         </div>
