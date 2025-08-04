@@ -34,5 +34,30 @@ const getbase64 = (file:any) => {
             reader.onerror = error => reject(error);
         })
     }
+const formatInterviewTime=(dateStr:any)=>{
+    const date = new Date(dateStr);
+    const vietnamTime = new Date(date.getTime() + (7 * 60 * 60 * 1000));
 
-export {formatDate, timeAgo, getbase64}
+    return vietnamTime.toLocaleString('en-US', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+}
+function openBase64PDFInNewTab(base64String:string){
+    const byteCharacters = atob(base64String);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i =0; i < byteCharacters.length; i++){
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], {type: 'application/pdf'});
+    const bolbURL = URL.createObjectURL(blob);
+    window.open(bolbURL, '_blank');
+}
+
+export {formatDate, timeAgo, getbase64, formatInterviewTime, openBase64PDFInNewTab}

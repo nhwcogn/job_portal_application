@@ -13,4 +13,9 @@ const updateProfile = async(profile:any) => {
     .then(result=>result.data)
     .catch(error=>{throw error})
 } 
-export { getProfile, updateProfile }
+const getAllProfiles = async ()=>{
+    return axios.get(`${base_url}getAll`)
+        .then(result => result.data)
+        .catch(error => {throw error})
+}
+export { getProfile, updateProfile, getAllProfiles }

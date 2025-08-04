@@ -30,7 +30,7 @@ const JobDesc = (props:any) => {
         } else {
             setApplied(false);
         }
-    }, [props]);  // CHỈ TRACK props.applicants và user.id
+    }, [props]); 
 
     const cleanHTML = DOMPurify.sanitize(props.description);
      return <div className="w-2/3">
@@ -49,7 +49,7 @@ const JobDesc = (props:any) => {
                     <Button color="brightSun.4" size="sm" variant="light">{props.edit?"Edit":"Apply"}</Button>
                 </Link>}
                 {
-                    applied && <Button color="green.8" size="sm" variant="light">Applied</Button>
+                    !props.edit && applied && <Button color="green.8" size="sm" variant="light">Applied</Button>
                 }
                 {props.edit?<Button color="red.5" size="sm" variant="outline">Delete</Button>:profile.savedJobs?.includes(props.id)?<IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer text-bright-sun-400" stroke={1.5}/>
                             :<IconBookmark onClick={handleSaveJob} className="text-mine-shaft-300 cursor-pointer hover:text-bright-sun-400" stroke={1.5}/>}

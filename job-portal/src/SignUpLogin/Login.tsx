@@ -57,7 +57,7 @@ const Login = () => {
           overlayProps={{ radius: 'sm', blur: 2 }}
           loaderProps={{ color: 'brightSun.4', type: 'bars' }}
         /><div className="w-1/2 px-20 flex flex-col justify-center gap-3">
-                <div className="text-2xl font-semibold">Create Account</div>
+                <div className="text-2xl font-semibold">Welcome back</div>
                 <TextInput value={data.email} error={formError.email} name="email" onChange={handleChange} withAsterisk leftSection={<IconAt size={16} />} label="Your email" placeholder="Your email"/>
                 <PasswordInput value={data.password} error={formError.password} name="password" onChange={handleChange} withAsterisk leftSection={<IconLock size={18} stroke={1.5} />} label="Password" placeholder="Password" />
                 <Button loading={loading} onClick={handleSubmit} autoContrast variant="filled">Login</Button>
