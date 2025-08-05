@@ -8,6 +8,8 @@ import { timeAgo } from "../Services/Utilities";
 import { useDispatch, useSelector } from "react-redux";
 import { changeProfile } from "../Slices/ProfileSlice";
 import { useEffect, useState } from "react";
+import { postJob } from "../Services/JobService";
+import { errorNotification, successNotification } from "../Services/NotificationService";
 
 const JobDesc = (props:any) => {
     const dispatch = useDispatch();
@@ -24,14 +26,20 @@ const JobDesc = (props:any) => {
             let updatedProfile={...profile,savedJobs:savedJobs};
             dispatch(changeProfile(updatedProfile));
         }
-    useEffect(() => {
-        if(props.applicants?.filter((applicant:any) => applicant.applicantId === user.applicantId)){
-            setApplied(true);
-        } else {
-            setApplied(false);
+        useEffect(() => {
+            if(props.applicants?.filter((applicant:any) => applicant.applicantId === user.applicantId)){
+                setApplied(true);
+            } else {
+                setApplied(false);
+            }
+        }, [props]); 
+        const handleClose=()=>{
+            postJob({...props, jobStatus: "CLOSED"}).then((res)=>{
+                successNotification("Success", "Job Closed Successfully");
+            }).catch((err)=>{
+                errorNotification("Error", err.response.data.errorMessage)
+            })
         }
-    }, [props]); 
-
     const cleanHTML = DOMPurify.sanitize(props.description);
      return <div className="w-2/3">
         <div className="flex justify-between ">
@@ -45,13 +53,13 @@ const JobDesc = (props:any) => {
                 </div>
             </div>
             <div className="flex flex-col gap-2 items-center">
-                {(props.edit || !applied) && <Link to={`/apply-job/${props.id}`} className="w-full"> 
-                    <Button color="brightSun.4" size="sm" variant="light">{props.edit?"Edit":"Apply"}</Button>
+                {(props.edit || !applied) && <Link to={props.edit?`/post-job/${props.id}`:`/apply-job/${props.id}`} className="w-full"> 
+                    <Button color="brightSun.4" size="sm" variant="light">{props.closed?"Reopen":props.edit?"Edit":"Apply"}</Button>
                 </Link>}
                 {
                     !props.edit && applied && <Button color="green.8" size="sm" variant="light">Applied</Button>
                 }
-                {props.edit?<Button color="red.5" size="sm" variant="outline">Delete</Button>:profile.savedJobs?.includes(props.id)?<IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer text-bright-sun-400" stroke={1.5}/>
+                {props.edit && !props.closed?<Button onClick={handleClose} color="red.5" size="sm" variant="outline">Close</Button>:profile.savedJobs?.includes(props.id)?<IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer text-bright-sun-400" stroke={1.5}/>
                             :<IconBookmark onClick={handleSaveJob} className="text-mine-shaft-300 cursor-pointer hover:text-bright-sun-400" stroke={1.5}/>}
             </div>
         </div>      

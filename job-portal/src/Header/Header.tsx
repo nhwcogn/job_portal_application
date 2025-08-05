@@ -11,7 +11,6 @@ import { getProfile } from "../Services/ProfileService";
 const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state:any) => state.user);
-    const profile = useSelector((state:any) => state.profile);
     useEffect(()=>{
         getProfile(user.id).then((data:any)=>{
             dispatch(setProfile(data));
