@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setProfile } from "../Slices/ProfileSlice";
 import { getProfile } from "../Services/ProfileService";
+import NotiMenu from "./NotiMenu";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -29,14 +30,10 @@ const Header = () => {
             {user ? <ProfileMenu/>:<Link to="/login">
             <Button variant="subtle" color="brightSun.4">Login</Button>
             </Link>}
-            <div className="bg-mine-shaft-900 rounded-full p-1.5">
+            {/* <div className="bg-mine-shaft-900 rounded-full p-1.5">
             <IconSettings stroke={1.5} />
-            </div>
-            <div className="bg-mine-shaft-900 rounded-full p-1.5">
-            <Indicator color="brightSun.4" offset={6} size={8} processing>
-                <IconBell stroke={1.5}/>
-            </Indicator>
-            </div>
+            </div> */}
+            {user?<NotiMenu/>:<></>}
         </div>
     </div>:<></>
 }
