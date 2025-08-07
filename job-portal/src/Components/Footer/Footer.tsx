@@ -4,8 +4,8 @@ import { footerLinks } from "../../Data/Data";
 
 const Footer = () => {
     const location= useLocation();
-    return location.pathname != "/sign-up" && location.pathname != "/login" ? <div className="pt-20 pb-5 flex gap-5 justify-around bg-mine-shaft-950">
-        <div className="w-1/4 flex flex-col gap-4">
+    return location.pathname != "/sign-up" && location.pathname != "/login" ? <div className="pt-20 pb-5 flex gap-8 justify-around bg-mine-shaft-950 flex-wrap">
+        <div className="w-1/4 p-4 sm-mx:w-1/3 xs-mx:w-1/2 xsm-mx:w-full flex flex-col gap-4">
             <div className="flex gap-3 items-center text-bright-sun-400">
             <IconBinoculars className="h-7 w-7" stroke={1.25}/>
             <div className="text-xl font-semibold">iJOBS</div>

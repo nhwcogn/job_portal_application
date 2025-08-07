@@ -18,7 +18,7 @@ const JobCard=(props:any) => {
         let updatedProfile={...profile,savedJobs:savedJobs};
         dispatch(changeProfile(updatedProfile));
     }
-    return <div className="bg-mine-shaft-900 p-4 w-72 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400 transition duration-300">
+    return <div className="sm-mx:w-full bg-mine-shaft-900 p-4 w-72 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400 transition duration-300">
         <div className="flex justify-between ">
             <div className="flex gap-2 items-center">
                 <div className="p-2 bg-mine-shaft-800 rounded-md">
@@ -32,10 +32,10 @@ const JobCard=(props:any) => {
             {profile.savedJobs?.includes(props.id)?<IconBookmarkFilled onClick={handleSaveJob} className="cursor-pointer text-bright-sun-400" stroke={1.5}/>
             :<IconBookmark onClick={handleSaveJob} className="text-mine-shaft-300 cursor-pointer hover:text-bright-sun-400" stroke={1.5}/>}
         </div>
-        <div className="flex gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:bg-mine-shaft-800 [&>div]: text-bright-sun-400 [&>div]:rounded-lg text-xs">
-            <div>{props.experience}</div>
-            <div>{props.jobType}</div>
-            <div>{props.location}</div>
+        <div className="flex gap-2 flex-wrap">
+            <div className="p-2 py-1 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">{props.experience}</div>
+            <div className="p-2 py-1 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">{props.jobType}</div>
+            <div className="p-2 py-1 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">{props.location}</div>
         </div>
         <Text className="!text-xs text-justify text-mine-shaft-300" lineClamp={3}>
             {props.about}

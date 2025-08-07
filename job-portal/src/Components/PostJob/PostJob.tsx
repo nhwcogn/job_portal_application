@@ -10,6 +10,7 @@ import { errorNotification, successNotification } from "../../Services/Notificat
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@mantine/hooks";
 
 const PostJob = () => {
     const {id} = useParams();
@@ -17,6 +18,7 @@ const PostJob = () => {
     const user = useSelector((state:any)=>state.user)
     const navigate = useNavigate();
     const select = fields;
+    // const matches = useMediaQuery('(min-width: 350px)');
     useEffect(()=>{
         window.scrollTo(0,0);
         if(id!=="0"){
@@ -75,18 +77,18 @@ const PostJob = () => {
             errorNotification("Error", err.response.data.errorMessage);
         })
     }
-    return <div className="w-3/4 mx-auto">
+    return <div className="px-16 bs-mx:px-10 md-mx:px-5 py-5">
         <div className="text-2xl font-semibold mb-5">Post Job</div>
         <div className="flex flex-col gap-5">
-            <div className="flex gap-10 [&>*]:w-1/2">
+            <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
                 <SelectInput form={form} name="jobTitle" {...select[0]}/>
                 <SelectInput form={form} name="company" {...select[1]}/>
             </div>
-            <div className="flex gap-10 [&>*]:w-1/2">
+            <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
                 <SelectInput form={form} name="experience" {...select[2]}/>
                 <SelectInput form={form} name="jobType" {...select[3]}/>
             </div>
-            <div className="flex gap-10 [&>*]:w-1/2">
+            <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
                 <SelectInput form={form} name="location" {...select[4]}/>
                 <NumberInput {...form.getInputProps('packageOffered')} label="Salary" min={1} max={1000} clampBehavior="strict" placeholder="Enter Salary" hideControls />
             </div>

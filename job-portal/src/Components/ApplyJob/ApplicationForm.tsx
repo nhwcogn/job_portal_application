@@ -62,11 +62,11 @@ const ApplicationForm = () => {
         />
         <div className="text-xl font-semibold mb-5">Submit Your Application</div>
             <div className="flex flex-col gap-5">
-                <div className="flex gap-10 [&>*]:w-1/2">
+                <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
                     <TextInput {...form.getInputProps("name")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Full Name" placeholder="Enter your full name" />
                     <TextInput {...form.getInputProps("email")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Email" placeholder="Enter your email" />
                 </div>
-                <div className="flex gap-10 [&>*]:w-1/2">
+                <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
                     <NumberInput {...form.getInputProps("phone")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Phone Number" placeholder="Enter your phone number" hideControls min={0} max={9999999999}/>
                     <TextInput {...form.getInputProps("website")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Personal Website" placeholder="Enter your URL" />
                 </div>
@@ -74,7 +74,7 @@ const ApplicationForm = () => {
                 <Textarea {...form.getInputProps("coverLetter")} readOnly={preview} variant={preview?"unstyled":"default"} className={`${preview?"text-mine-shaft-300 font-semibold":""}`} withAsterisk label="Cover Letter" placeholder="Write your cover letter here" autosize minRows={4}/>
                 {!preview && <Button onClick={handlePreview} color="brightSun.4" variant="light">Preview</Button>}
                 {
-                    preview && <div className="flex gap-10 [&>*]:w-1/2">
+                    preview && <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
                         <Button fullWidth onClick={handlePreview} color="brightSun.4" variant="outline">Edit</Button>
                         <Button fullWidth onClick={handleSubmit} color="brightSun.4" variant="light">Submit</Button>
                     </div>

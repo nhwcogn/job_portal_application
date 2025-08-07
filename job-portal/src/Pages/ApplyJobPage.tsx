@@ -19,8 +19,8 @@ const ApplyJobPage = () => {
         }, [id]);
     return (
         <div className="min-h-[100vh] bg-mine-shaft-950 p-4">
-            <Divider size="xs"/>
-                <Button my="md" onClick={()=>navigate(-1)} leftSection={<IconArrowLeft size={20}/>} color="brightSun.4" variant="light">Back</Button>
+            <Divider size="xs" mb="xs"/>
+                <Button mb="xs" onClick={()=>navigate(-1)} leftSection={<IconArrowLeft size={20}/>} color="brightSun.4" variant="light">Back</Button>
             <ApplyJobComp {...job}/>
         </div>
     )

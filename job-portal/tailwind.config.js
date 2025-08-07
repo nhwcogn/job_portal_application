@@ -1,3 +1,5 @@
+const { transform } = require('typescript');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -32,8 +34,36 @@ module.exports = {
           '900': '#7a330d',
           '950': '#461902',
         },
-      }
+      },
+      keyframes:{
+        'option-animation':{
+          from: { opacity: '0', transform: 'translateX(-20px)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        'option-animation': 'option-animation 200ms ease forwards',
+      },
     },
+    screens:{
+      'xsm': '350px',
+      'xs': '476px',
+      'sm': '640px',
+      'md': '768px',
+      'bs': '900px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+
+      '2xl-mx': { 'max': '1535px' },
+      'xl-mx': { 'max': '1279px' },
+      'lg-mx': { 'max': '1023px' },
+      'bs-mx': { 'max': '900px' },
+      'md-mx': { 'max': '767px' },
+      'sm-mx': { 'max': '639px' },
+      'xs-mx': { 'max': '475px' },
+      'xsm-mx': { 'max': '349px' },
+    }
   },
   plugins: [],
 }
