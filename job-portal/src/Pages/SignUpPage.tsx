@@ -1,6 +1,6 @@
 import IconBinoculars from "@tabler/icons-react/dist/esm/icons/IconBinoculars";
-import SignUp from "../SignUpLogin/SignUp";
-import Login from "../SignUpLogin/Login";
+import SignUp from "../Components/SignUpLogin/SignUp";
+import Login from "../Components/SignUpLogin/Login";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";

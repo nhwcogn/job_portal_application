@@ -1,6 +1,6 @@
 import { Divider } from "@mantine/core";
-import PostedJob from "../PostedJob/PostedJob";
-import PostedJobDesc from "../PostedJob/PostedJobDesc";
+import PostedJob from "../Components/PostedJob/PostedJob";
+import PostedJobDesc from "../Components/PostedJob/PostedJobDesc";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";

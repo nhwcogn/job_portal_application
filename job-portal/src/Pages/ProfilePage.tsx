@@ -1,5 +1,5 @@
 import { Divider } from "@mantine/core";
-import ProfileUser from "../Profile/ProfileUser";
+import ProfileUser from "../Components/Profile/ProfileUser";
 
 const ProfilePage=()=>{
     return <div className="min-h-[90vh] bg-mine-shaft-950">

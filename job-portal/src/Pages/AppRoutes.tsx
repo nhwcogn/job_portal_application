@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import Header from "../Header/Header"
+import Header from "../Components/Header/Header"
 import { Divider } from "@mantine/core"
-import Footer from "../Footer/Footer"
 import FindJobs from "./FindJobs"
 import FindTalentPage from "./FindTalentPage"
 import JobDescPage from "./JobDescPage"
@@ -15,6 +14,9 @@ import SignUpPage from "./SignUpPage"
 import ProfilePage from "./ProfilePage"
 import HomePage from "./HomePage"
 import { useSelector } from "react-redux"
+import ProtectedRoute from "../Services/ProtectedRouteProps"
+import PublicRoute from "../Services/PublicRoute"
+import Footer from "../Components/Footer/Footer"
 
 const AppRoutes = () => {
     const user = useSelector((state: any) => state.user);
@@ -27,13 +29,13 @@ const AppRoutes = () => {
         <Route path='/find-talent' element={<FindTalentPage/>} />
         <Route path='/jobs/:id' element={<JobDescPage/>} />
         <Route path='/apply-job/:id' element={<ApplyJobPage/>} />
-        <Route path='/post-job/:id' element={<PostJobPage/>} />
-        <Route path='/posted-jobs/:id' element={<PostedJobPage/>} />
-        <Route path='/job-history' element={<JobHistoryPage/>} />
+        <Route path='/post-job/:id' element={<ProtectedRoute allowedRoles={['EMPLOYER']}><PostJobPage/></ProtectedRoute>} />
+        <Route path='/posted-jobs/:id' element={<ProtectedRoute allowedRoles={['EMPLOYER']}><PostedJobPage/></ProtectedRoute>} />
+        <Route path='/job-history' element={<ProtectedRoute allowedRoles={['APPLICANT']}><JobHistoryPage/></ProtectedRoute>} />
         <Route path='/talent-profile/:id' element={<TalentProfilePage/>} />
         <Route path='/company/:name' element={<CompanyPage/>} />
-        <Route path='/sign-up' element={user ? <Navigate to="/" /> : <SignUpPage />} />
-        <Route path='/login' element={user ? <Navigate to="/" /> : <SignUpPage />} />
+        <Route path='/sign-up' element={<PublicRoute><SignUpPage /></PublicRoute>} />
+        <Route path='/login' element={<SignUpPage />} />
         <Route path='/profile' element={<ProfilePage/>} />
         <Route path='*' element={<HomePage/>} />
       </Routes>

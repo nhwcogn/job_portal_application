@@ -1,9 +1,9 @@
 import { Button, Divider } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
 import { IconArrowLeft } from "@tabler/icons-react";
-import Profile from "../TalentProfile/Profile";
+import Profile from "../Components/TalentProfile/Profile";
 import { profile } from "../Data/TalentData";
-import RecommendTalent from "../TalentProfile/RecommendTalent";
+import RecommendTalent from "../Components/TalentProfile/RecommendTalent";
 import { useEffect, useState } from "react";
 import { getAllProfiles } from "../Services/ProfileService";
 
