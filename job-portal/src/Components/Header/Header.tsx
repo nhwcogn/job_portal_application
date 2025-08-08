@@ -33,10 +33,12 @@ const Header = () => {
     useEffect(()=>{
         
         if(token!=""){
-            const decoded = jwtDecode(localStorage.getItem("token")||"");
-            dispatch(setUser({...decoded, email:decoded.sub}));
+            if(localStorage.getItem("token")!=""){
+                const decoded = jwtDecode(localStorage.getItem("token")||"");
+                dispatch(setUser({...decoded, email:decoded.sub}));
+            }
         }
-        getProfile(user?.profileId).then((res)=>{
+        if(user?.profileId)getProfile(user?.profileId).then((res)=>{
             dispatch(setProfile(res));
         }).catch((err)=>{
             console.log(err);

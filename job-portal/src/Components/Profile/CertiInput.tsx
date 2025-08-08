@@ -7,10 +7,12 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
 import { successNotification } from "../../Services/NotificationService";
 import { changeProfile } from "../../Slices/ProfileSlice";
+import { useMediaQuery } from "@mantine/hooks";
 
 const CertiInput=(props:any)=>{
     const dispatch = useDispatch();
     const select = fields;
+    const matches = useMediaQuery('(max-width: 475px)');
     const profile = useSelector((state:any) => state.profile);
     const form = useForm({
             mode: 'controlled',
@@ -41,11 +43,11 @@ const CertiInput=(props:any)=>{
     }
     return <div className="flex flex-col gap-3">
         <div className="text-lg font-semibold">Add Certificate</div>
-        <div className="flex gap-10 [&>*]:w-1/2">
+        <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 xs-mx:[&>*]:w-full xs-mx:flex-wrap my-3">
             <TextInput {...form.getInputProps("name")} label="Title" withAsterisk placeholder="Enter title"/>
             <SelectInput form={form} name="issuer" {...select[1]}/>
         </div>
-        <div className="flex gap-10 [&>*]:w-1/2">
+        <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 xs-mx:[&>*]:w-full xs-mx:flex-wrap my-3">
             <MonthPickerInput {...form.getInputProps("issueDate")} withAsterisk maxDate={new Date()} label="Issue date" placeholder="Pick date"/>
             <TextInput {...form.getInputProps("certificateId")} label="Certificate ID" withAsterisk placeholder="Enter ID"/>
         </div>

@@ -22,13 +22,15 @@ const PostedJobDesc = (props:any) => {
     useEffect(()=>{
         handleTabChange("overview");
     }, [props])
-    return <div className="w-3/4 mt-5 px-5">
-        {props.jobTitle?<><div className="text-2xl font-semibold flex items-center">{props.jobTitle}
+    return <div className="w-3/4 md-mx:w-full px-5 ms-mx:p-0">
+        {props.jobTitle?<><div className="text-2xl xs-mx:text-xl font-semibold flex items-center">{props.jobTitle}
             <Badge variant="light" ml="sm" color="brightSun.4" size="sm">{props.jobStatus}</Badge></div>
-        <div className="font-medium text-mine-shaft-300 mb-5">{props.location}</div>
+        <div className="font-medium xs-mx:text-sm text-mine-shaft-300 mb-5">{props.location}</div>
         <div>
             <Tabs value={tab} onChange={handleTabChange} autoContrast variant="outline" radius="lg">
-                    <Tabs.List className="[&_button]:!text-lg font-semibold mb-5 [&_button[data-active='true']]:text-bright-sun-400">
+                    <Tabs.List className="font-semibold [&_button[data-active='true']]:!border-b-mine-shaft-950 
+                [&_button]:!text-xl sm-mx:[&_button]:!text-lg xs-mx:[&_button]:!text-base xsm-mx:[&_button]:!text-sm 
+                xs-mx:[&_button]:!px-1.5 xs-mx:[&_button]:!py-2 mb-5 [&_button[data-active='true']]:text-bright-sun-400 xs-mx:font-medium">
                         <Tabs.Tab value="overview">Overview</Tabs.Tab>
                         <Tabs.Tab value="applicants">Applicants</Tabs.Tab>
                         <Tabs.Tab value="invited">Invited</Tabs.Tab>

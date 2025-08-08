@@ -25,6 +25,7 @@ const AppRoutes = () => {
       <Header/>
       <Divider size="xs" mx="md" />
       <Routes>
+        <Route path='/' element={<HomePage/>} />
         <Route path='/find-jobs' element={<FindJobs/>} />
         <Route path='/find-talent' element={<FindTalentPage/>} />
         <Route path='/jobs/:id' element={<JobDescPage/>} />
@@ -35,7 +36,7 @@ const AppRoutes = () => {
         <Route path='/talent-profile/:id' element={<TalentProfilePage/>} />
         <Route path='/company/:name' element={<CompanyPage/>} />
         <Route path='/sign-up' element={<PublicRoute><SignUpPage /></PublicRoute>} />
-        <Route path='/login' element={<SignUpPage />} />
+        <Route path='/login' element={<PublicRoute><SignUpPage /></PublicRoute>} />
         <Route path='/profile' element={<ProfilePage/>} />
         <Route path='*' element={<HomePage/>} />
       </Routes>
