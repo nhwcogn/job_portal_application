@@ -1,18 +1,29 @@
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavLinks = () => {
-    const links = [
-        { name: "Find Jobs", url: "/find-jobs" },
-        { name: "Find Talent", url: "/find-talent" },
-        { name: "Post Job", url: "/post-job/0" },
-        { name: "Posted Job", url: "/posted-jobs/0" },
-        { name: "Job History", url: "/job-history" }
-    ];
     const location = useLocation();
+    const accountType = useSelector((state: any) => state.user?.accountType);
+    const allLinks = [
+        { name: "Find Jobs", url: "/find-jobs", roles: ["EMPLOYER", "APPLICANT"] },
+        { name: "Find Talent", url: "/find-talent", roles: ["EMPLOYER"] },
+        { name: "Post Job", url: "/post-job/0", roles: ["EMPLOYER"] },
+        { name: "Posted Job", url: "/posted-jobs/0", roles: ["EMPLOYER"] },
+        { name: "Job History", url: "/job-history", roles: ["APPLICANT"] }
+    ];
+    const filteredLinks = accountType
+        ? allLinks.filter(link => link.roles.includes(accountType))
+        : [];
+    if (!accountType) {
+        return (
+            <div className="flex bs-mx:!hidden gap-5 text-mine-shaft-300 h-full items-center">
+                <span>Loading...</span>
+            </div>
+        );
+    }
     return (
         <div className="flex bs-mx:!hidden gap-5 text-mine-shaft-300 h-full items-center">
-            {links.map((link, index) => (
+            {filteredLinks.map((link, index) => (
                 <div
                     key={index}
                     className={`${
